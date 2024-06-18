@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.BlazorWebAssembly">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\Audio\mixkit-arcade-retro-game-over-213.wav" />
+    <None Include="wwwroot\Audio\mixkit-fast-rocket-whoosh-1714.wav" />
+    <None Include="wwwroot\Audio\mixkit-fast-small-sweep-transition-166.wav" />
+    <None Include="wwwroot\Video\A+ STUDENT MENTALITY - Best Study Motivation.mp4" />
+    <None Include="wwwroot\Video\My Daily Routine_ How I Study SMART, Not HARD.mp4" />
+    <None Include="wwwroot\Video\My M3 MacBook Pro Setup for Coding and Productivity %281%29.mp4" />
+    <None Include="wwwroot\Video\My M3 MacBook Pro Setup for Coding and Productivity.mp4" />
+    <None Include="wwwroot\Video\y2mate.so - 4 IMPORTANT Productive Things To Do In Your Free Time-1SjtNaqbdpc-360p-1718661706.mp4" />
+    <None Include="wwwroot\Video\y2mate.so - Build a To-Do app using C# and Blazor--fAVNxsDyH0-360p-1718661650.mp4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Components.WebAssembly.DevServer" Version="8.0.1" PrivateAssets="all" />
+    <PackageReference Include="MudBlazor" Version="6.20.0" />
+  </ItemGroup>
+
+</Project>

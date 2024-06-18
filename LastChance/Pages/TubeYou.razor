@@ -1,0 +1,71 @@
+﻿@page "/tubeYou"
+
+
+<h3>TubeYou</h3>
+
+<MudTextField  @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary" />
+
+<video controls="controls">
+    <source src="\Video\BuildToDoAppWithBlazor.mp4" />
+</video>
+
+<div class="container">
+    <div class="row">
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\DailyRoutine.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\FourThingsToIncreaseProductivity.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\M3ProProductiveCodingSetUp.mp4" />
+            </video>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\StudyMotivation.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\BuildToDoAppWithBlazor.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\DailyRoutine.mp4" />
+            </video>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\M3ProProductiveCodingSetUp.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\FourThingsToIncreaseProductivity.mp4" />
+            </video>
+        </div>
+        <div class="col-4">
+            <video controls="controls" width="250px" height="350px">
+                <source src="\Video\StudyMotivation.mp4" />
+            </video>
+        </div>
+    </div>
+</div>
+
+
+
+@code {
+    public string Search { get; set;}
+
+}
