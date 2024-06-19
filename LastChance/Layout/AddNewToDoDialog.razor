@@ -25,17 +25,12 @@
 
     protected override void OnInitialized()
     {
-        using (var context = new MyDbContext())
-        {
-            context.Database.EnsureCreated();
-            ToDos = context.ToDos.Select(x => x).ToList();
-        }
+        
     }
 
     private void Add()
     {
-        using (var context = new MyDbContext())
-        {
+        
             if (TempToDos.Comment == null || TempToDos.Title == null)
             {
                 DialogService.ShowMessageBox(
@@ -54,17 +49,16 @@
                 }
                 else
                 {
-                    context.ToDos.Add(new ToDos
+                    ToDos.Add(new ToDos
                         {
                             Title = TempToDos.Title,
                             Comment = TempToDos.Comment,
                             Created = DateTime.Now,
                             IsDone = false
                         });
-                    context.SaveChanges();
                 }
             }
-        }
+        
         MudDialog.Close(DialogResult.Ok(true));
     }
 

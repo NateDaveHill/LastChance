@@ -24,8 +24,4 @@
     <PackageReference Include="MudBlazor" Version="6.20.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\DataBase\DataBase.csproj" />
-  </ItemGroup>
-
 </Project>

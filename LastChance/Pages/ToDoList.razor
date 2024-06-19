@@ -12,8 +12,8 @@
     <MudItem xs="2">
         <h3>Remove All ToDos</h3>
         <br />
-        <MudFab class="" Size="Size.Large" @onclick="DeleteAllToDos"
-                Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove" />
+        @* <MudFab class="" Size="Size.Large" @onclick="DeleteAllToDos"
+             *@    Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove" />
         <br />
     </MudItem>
     <MudItem xs="12">
@@ -36,10 +36,10 @@
                             <MudItem xs="3" />
                             <MudItem xs="3" />
                             <MudItem xs="3">
-                                <MudButton class="md-fab md-fab-bottom-right" aria-label="Remove A ToDo"
+                                @* <MudButton class="md-fab md-fab-bottom-right" aria-label="Remove A ToDo"
                                            @onclick="args => DeleteToDo(args, toDo.Id)">
                                     <md-icon>Remove</md-icon>
-                                </MudButton>
+                                </MudButton> *@
                             </MudItem>
                         </MudGrid>
                     </MudPaper>
@@ -63,13 +63,7 @@
 
     protected override void OnInitialized()
     {
-        using (var context = new MyDbContext())
-        {
-            // context.Database.EnsureCreated(); Runtime error here on this end
-
-            ToDos = context.ToDos.Select(x => x).ToList();
-            Refresh();
-        }
+        
     }
 
 
@@ -85,42 +79,42 @@
         else
         {
             dialog.Close();
-            Refresh();
+            // Refresh();
 
         }
     }
 
-    private void DeleteToDo(MouseEventArgs e, int toDoId)
-    {
-        using (var context = new MyDbContext())
-        {
-            var deleteToDo = context.ToDos.Where(x => x.Id == toDoId).First();
-            context.Remove(deleteToDo);
-            context.SaveChanges();
-            Refresh();
-        }
-    }
+    // private void DeleteToDo(MouseEventArgs e, int toDoId)
+    // {
+    //     using (var context = new MyDbContext())
+    //     {
+    //         var deleteToDo = context.ToDos.Where(x => x.Id == toDoId).First();
+    //         context.Remove(deleteToDo);
+    //         context.SaveChanges();
+    //         Refresh();
+    //     }
+    // }
 
-    private void DeleteAllToDos()
-    {
-        using (var context = new MyDbContext())
-        {
-            var allToDos = context.ToDos.Select(x => x).ToList();
-            foreach (var todo in allToDos)
-            {
-                context.ToDos.Remove(todo);
-            }
-            context.SaveChanges();
-            Refresh();
-        }
-    }
+    // private void DeleteAllToDos()
+    // {
+    //     using (var context = new MyDbContext())
+    //     {
+    //         var allToDos = context.ToDos.Select(x => x).ToList();
+    //         foreach (var todo in allToDos)
+    //         {
+    //             context.ToDos.Remove(todo);
+    //         }
+    //         context.SaveChanges();
+    //         Refresh();
+    //     }
+    // }
 
-    private void Refresh()
-    {
-        using (var context = new MyDbContext())
-        {
-            ToDos = context.ToDos.Select(x => x).ToList();
-        }
-    }
+    // private void Refresh()
+    // {
+    //     using (var context = new MyDbContext())
+    //     {
+    //         ToDos = context.ToDos.Select(x => x).ToList();
+    //     }
+    // }
 
 }
