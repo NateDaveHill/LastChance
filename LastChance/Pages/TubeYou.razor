@@ -4,68 +4,85 @@
 
 <h1>TubeYou</h1>
 
-<MudTextField @bind-Value="Search" Label="Search" Variant="Variant.Outlined" Adornment="Adornment.End" AdornmentIcon="@Icons.Material.Filled.Search" AdornmentColor="Color.Secondary"/>
-
-<video controls="controls">
-    <source src="\Video\BuildToDoAppWithBlazor.mp4"/>
+<video controls="controls" width="600" class="video-player">
+    <source src="@SourcePath" />
 </video>
 
-<div class="container">
-    <div class="row">
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+<MudGrid>
+    <MudItem xs="12"></MudItem>
+    <MudItem xs="4">
+        <MudButton OnClick="@(() => ChangeVideoSource("/Video/DailyRoutine.mp4"))">
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\DailyRoutine.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" disabled="true" muted="muted" width="250" height="150">
                 <source src="\Video\FourThingsToIncreaseProductivity.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\M3ProProductiveCodingSetUp.mp4"/>
             </video>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\StudyMotivation.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width=" 250" height="150">
                 <source src="\Video\BuildToDoAppWithBlazor.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
-                <source src="\Video\DailyRoutine.mp4"/>
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width="250" height="150">
+                <source src="\Video\DailyRoutine.mp4" />
             </video>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\M3ProProductiveCodingSetUp.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem xs="4">
+        <MudButton>
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\FourThingsToIncreaseProductivity.mp4"/>
             </video>
-        </div>
-        <div class="col-4">
-            <video controls="controls" width="250" height="350">
+        </MudButton>
+    </MudItem>
+    <MudItem>
+        <MudButton >
+            <video controls="controls" muted="muted" width="250" height="150">
                 <source src="\Video\StudyMotivation.mp4"/>
             </video>
-        </div>
-    </div>
-</div>
+        </MudButton>
+    </MudItem>
+</MudGrid>
 
 
 @code {
-    public string Search { get; set; }
+    private string SourcePath { get; set; } = "/Video/BuildToDoAppWithBlazor.mp4";
+
+    private void ChangeVideoSource(string newSourcePath)
+    {
+        SourcePath = newSourcePath;
+
+    }
 
 }
