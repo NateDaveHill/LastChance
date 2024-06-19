@@ -4,7 +4,7 @@
 
 <h1>TubeYou</h1>
 
-<video controls="controls" width="600" class="video-player">
+<video controls="controls" width="600" @ref="videoElement" class="video-player">
     <source src="@SourcePath" />
 </video>
 
@@ -78,11 +78,16 @@
 
 @code {
     private string SourcePath { get; set; } = "/Video/BuildToDoAppWithBlazor.mp4";
+    private ElementReference videoElement;
+    [Inject]
+    private IJSRuntime JSRuntime { get; set; }
 
-    private void ChangeVideoSource(string newSourcePath)
+
+    private async Task ChangeVideoSource(string newSourcePath)
     {
         SourcePath = newSourcePath;
-
+        await InvokeAsync(StateHasChanged);
+        await JSRuntime.InvokeVoidAsync("playVideo", videoElement);
     }
 
 }

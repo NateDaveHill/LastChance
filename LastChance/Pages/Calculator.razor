@@ -6,13 +6,13 @@
 
 <MudGrid Class="d-flex justify-center">
     <MudItem xs="6">
-        <MudCard>
+        <MudCard Style="width:400px">
             <MudNumericField T="int" Placeholder="0" @bind-Value="numericField1"></MudNumericField>
             <MudNumericField T="int" Placeholder="0" @bind-Value="numericField2"></MudNumericField>
             <MudNumericField T="int" Placeholder="0" @bind-Value="numericFieldSum"></MudNumericField>
 
             <MudCardActions Class="d-flex justify-center">
-                <MudGrid Spacing="10">
+                <MudGrid>
                     <MudItem>
                         <MudButton xs="3" @onclick="Addition">+</MudButton>
                     </MudItem>
