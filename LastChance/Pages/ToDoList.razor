@@ -66,6 +66,7 @@
         using (var context = new MyDbContext())
         {
             // context.Database.EnsureCreated(); Runtime error here on this end
+
             ToDos = context.ToDos.Select(x => x).ToList();
             Refresh();
         }
