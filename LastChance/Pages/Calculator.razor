@@ -7,47 +7,23 @@
 <MudGrid Class="d-flex justify-center">
     <MudItem xs="6">
         <MudCard>
-            <MudNumericField T="decimal" Placeholder="0" bind-Value="numericField"></MudNumericField>
-            <MudNumericField T="decimal" Placeholder="0" bind-Value="numericField"></MudNumericField>
-            <MudNumericField T="decimal" Placeholder="0" bind-Value="numericField"></MudNumericField>
-            
+            <MudNumericField T="int" Placeholder="0" @bind-Value="numericField1"></MudNumericField>
+            <MudNumericField T="int" Placeholder="0" @bind-Value="numericField2"></MudNumericField>
+            <MudNumericField T="int" Placeholder="0" @bind-Value="numericFieldSum"></MudNumericField>
+
             <MudCardActions Class="d-flex justify-center">
                 <MudGrid Spacing="10">
                     <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">1</MudButton>
+                        <MudButton xs="3" @onclick="Addition">+</MudButton>
                     </MudItem>
                     <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">2</MudButton>
+                        <MudButton xs="3" @onclick="Substraction">-</MudButton>
                     </MudItem>
                     <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">3</MudButton>
+                        <MudButton xs="3" @onclick="Division">/</MudButton>
                     </MudItem>
                     <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">+</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">4</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">5</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">6</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">-</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">7</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">8</MudButton>
-                    </MudItem>
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">9</MudButton>
-                    </MudItem> 
-                    <MudItem>
-                        <MudButton xs="3" @onclick="IncrementCount">=</MudButton>
+                        <MudButton xs="3" @onclick="Multiplication">*</MudButton>
                     </MudItem>
                 </MudGrid>
             </MudCardActions>
@@ -56,11 +32,28 @@
 </MudGrid>
 
 @code {
-    private int numericField = 0;
+    private int numericField1 = 0;
+    private int numericField2 = 0;
+    private int numericFieldSum = 0;
 
-    private void IncrementCount()
+    private void Addition(MouseEventArgs e)
     {
+        numericFieldSum = numericField1 + numericField2;
+    }
+
+    private void Substraction(MouseEventArgs e)
+    {
+        numericFieldSum = numericField1 - numericField2;
+    }
+
+    private void Division(MouseEventArgs e)
+    {
+        numericFieldSum = numericField1 / numericField2;
+    }
+
+    private void Multiplication(MouseEventArgs e)
+    {
+        numericFieldSum = numericField1 * numericField2;
     }
 
 }
-
