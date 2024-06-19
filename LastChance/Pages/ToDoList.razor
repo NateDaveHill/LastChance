@@ -3,25 +3,39 @@
 @inject IDialogService DialogService
 
 <MudGrid>
-    <MudItem xs="10">
-        <h3>Add New ToDo</h3>
-        <br />
-        <MudFab @onclick="OpenDialog" Color="Color.Primary" StartIcon="@Icons.Material.Filled.Add" />
-        <br />
+    <MudItem xs="12">
+        <MudButton Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" Color="Color.Error" FullWidth="true" @onclick="DeleteAllToDos">Remove All</MudButton>
     </MudItem>
-    <MudItem xs="2">
-        <h3>Remove All ToDos</h3>
-        <br />
-        @* <MudFab class="" Size="Size.Large" @onclick="DeleteAllToDos"
-             *@    Color="Color.Error" StartIcon="@Icons.Material.Filled.Remove" />
-        <br />
+    <MudItem xs="12" Class="justify-center">
+        <MudCard Outlined="true">
+            <MudCardHeader>
+                <CardHeaderContent>
+                    <MudText Typo="Typo.h6">Add New ToDo</MudText>
+                </CardHeaderContent>
+            </MudCardHeader>
+            <MudTextField Placeholder="Title of ToDo" @bind-Value="TempToDos.Title"></MudTextField>
+            <br/>
+            <MudTextField Placeholder="Comments" @bind-Value="TempToDos.Comment"></MudTextField>
+
+            <MudCardActions Class="justify-center">
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudButton OnClick="Add" Variant="Variant.Filled" Color="Color.Success" FullWidth="true">Add</MudButton>
+                    </MudItem>
+                    <MudItem xs="6">
+                        <MudButton OnClick="Cancel" Variant="Variant.Filled" Color="Color.Secondary" FullWidth="true">Cancel</MudButton>
+                    </MudItem>
+                </MudGrid>
+            </MudCardActions>
+        </MudCard>
+        <br/>
     </MudItem>
     <MudItem xs="12">
         <MudGrid>
             @foreach (var toDo in ToDos)
             {
                 <MudItem xs="6" sm="3">
-                    <br />
+                    <br/>
                     <MudPaper Height="Auto" Width="Auto" Elevation="3"
                               Style="@($"color:{Theme.Palette.Dark}; padding: 5%; background:{Theme.Palette.Warning}; white-space: normal; overflow: auto; text-overflow: ellipsis;")"
                               Class="p-4" Outlined="true">
@@ -29,21 +43,19 @@
                             <MudItem xs="12">
                                 <MudCheckBox @bind-Checked="@toDo.IsDone" T="bool" Color="Color.Primary">
                                     ToDo: @toDo.Title
-                                    <br />
+                                    <br/>
                                     Comment: @toDo.Comment
                                 </MudCheckBox>
                             </MudItem>
-                            <MudItem xs="3" />
-                            <MudItem xs="3" />
+                            <MudItem xs="3"/>
+                            <MudItem xs="3"/>
+                            <MudItem xs="3"/>
                             <MudItem xs="3">
-                                @* <MudButton class="md-fab md-fab-bottom-right" aria-label="Remove A ToDo"
-                                           @onclick="args => DeleteToDo(args, toDo.Id)">
-                                    <md-icon>Remove</md-icon>
-                                </MudButton> *@
+                                <MudIconButton Icon="@Icons.Material.Filled.Delete" aria-label="delete" @onclick="args => DeleteToDo(args, toDo.Id)"></MudIconButton>
                             </MudItem>
                         </MudGrid>
                     </MudPaper>
-                    <br />
+                    <br/>
                 </MudItem>
             }
         </MudGrid>
@@ -55,66 +67,67 @@
 
     private readonly MudTheme Theme = new();
 
-    MudDialogInstance MudDialog;
     public List<ToDos> ToDosOfDay;
     readonly ToDos TempToDos = new();
-    public List<ToDos>? ToDos;
+    public List<ToDos>? ToDos = new();
     private DialogResult? result;
 
     protected override void OnInitialized()
     {
-        
     }
 
 
-    private async Task OpenDialog()
+    private void DeleteToDo(MouseEventArgs e, int toDoId)
     {
-        var options = new DialogOptions { CloseOnEscapeKey = true, FullWidth = true };
-        var dialog = DialogService.Show<AddNewToDoDialog>("Add new To Do", options);
-        result = await dialog.Result;
-        if (result.Cancelled.Equals(true))
+        var deleteToDo = ToDos.Where(x => x.Id == toDoId).First();
+        ToDos.Remove(deleteToDo);
+    }
+
+    private void DeleteAllToDos()
+    {
+        var allToDos = ToDos.Select(x => x).ToList();
+        foreach (var todo in allToDos)
         {
-            dialog.Close();
+            ToDos.Remove(todo);
+        }
+    }
+
+    private void Add()
+    {
+        if (TempToDos.Comment == null || TempToDos.Title == null)
+        {
+            DialogService.ShowMessageBox(
+                "NullError",
+                "One of the TextAreas is empty, please fill out everything.",
+                "Okay");
         }
         else
         {
-            dialog.Close();
-            // Refresh();
-
+            if (TempToDos.Title.Length > 10 || TempToDos.Comment.Length > 10)
+            {
+                DialogService.ShowMessageBox(
+                    "MaxCapacity",
+                    "You have reached max capacity of characters, please use less to proceed.",
+                    "Okay");
+            }
+            else
+            {
+                ToDos.Add(new ToDos
+                {
+                    Title = TempToDos.Title,
+                    Comment = TempToDos.Comment,
+                    Created = DateTime.Now,
+                    IsDone = false
+                });
+            }
         }
+
     }
 
-    // private void DeleteToDo(MouseEventArgs e, int toDoId)
-    // {
-    //     using (var context = new MyDbContext())
-    //     {
-    //         var deleteToDo = context.ToDos.Where(x => x.Id == toDoId).First();
-    //         context.Remove(deleteToDo);
-    //         context.SaveChanges();
-    //         Refresh();
-    //     }
-    // }
-
-    // private void DeleteAllToDos()
-    // {
-    //     using (var context = new MyDbContext())
-    //     {
-    //         var allToDos = context.ToDos.Select(x => x).ToList();
-    //         foreach (var todo in allToDos)
-    //         {
-    //             context.ToDos.Remove(todo);
-    //         }
-    //         context.SaveChanges();
-    //         Refresh();
-    //     }
-    // }
-
-    // private void Refresh()
-    // {
-    //     using (var context = new MyDbContext())
-    //     {
-    //         ToDos = context.ToDos.Select(x => x).ToList();
-    //     }
-    // }
+    void Cancel()
+    {
+        TempToDos.Title = String.Empty;
+        TempToDos.Comment = String.Empty;
+    }
 
 }
